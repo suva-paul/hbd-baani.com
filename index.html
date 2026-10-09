@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#ff4d88">
+
+    <meta
+        name="description"
+        content="A beautiful interactive birthday surprise ❤️">
+
+    <title>Happy Birthday ❤️</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap"
+          rel="stylesheet">
+
+    <!-- Styles -->
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <link rel="stylesheet"
+          href="css/animations.css">
+
+</head>
+
+<body>
+
+    <!-- =====================================================
+         Animated Background
+    ====================================================== -->
+
+    <div id="gradient-bg"></div>
+
+    <div id="stars"></div>
+
+    <div id="sparkles-container"></div>
+
+    <div id="hearts-container"></div>
+
+    <div id="petals-container"></div>
+
+    <div id="fireworks-container"></div>
+
+
+    <!-- =====================================================
+         Splash Screen
+    ====================================================== -->
+
+    <section id="splash-screen">
+
+        <div class="loader"></div>
+
+        <h1 class="heartbeat">
+            Loading your surprise...
+        </h1>
+
+        <p class="loading-pulse">
+            Please wait ❤️
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         Main App
+    ====================================================== -->
+
+    <main id="app">
+
+        <!-- ===============================================
+             PASSWORD SCREEN
+        ================================================ -->
+
+        <section
+            id="password-screen"
+            class="screen active fade-in">
+
+            <div id="password-card" class="glass-card heartbeat">
+
+                <div class="lock-icon">
+                    🔒
+                </div>
+
+                <h1 id="password-title">
+
+                    Welcome ❤️
+
+                </h1>
+
+                <p>
+
+                    A little secret protects
+                    today's surprise.
+
+                </p>
+
+                <p id="hint">
+
+                    Hint appears here...
+
+                </p>
+
+                <div class="password-wrapper">
+
+                    <input
+                        id="password-input"
+                        type="password"
+                        placeholder="Enter password">
+
+                    <button
+                        id="toggle-password"
+                        class="icon-btn"
+                        type="button">
+
+                        👁️
+
+                    </button>
+
+                </div>
+
+                <button
+                    id="password-submit"
+                    class="primary-btn">
+
+                    Unlock ❤️
+
+                </button>
+
+                <p id="password-message"></p>
+
+            </div>
+
+        </section>
+<!-- ===============================================
+             PROPOSAL SCREEN
+        ================================================ -->
+
+        <section
+            id="proposal-screen"
+            class="screen">
+
+            <div class="glass-card">
+
+                <h1 id="proposal-title">
+                    Hi ❤️
+                </h1>
+
+                <h2 id="proposal-question">
+                    Will you be my forever?
+                </h2>
+
+                <div class="button-area">
+
+                    <button
+                        id="yes-btn"
+                        class="primary-btn glow-pulse">
+
+                        Yes 💖
+
+                    </button>
+
+                    <button
+                        id="no-btn"
+                        class="secondary-btn">
+
+                        No 🙈
+
+                    </button>
+
+                </div>
+
+                <p id="no-message"></p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================================
+             MUSIC PLAYER
+        ================================================ -->
+
+        <div id="music-player">
+
+            <button
+                id="music-toggle"
+                type="button"
+                aria-label="Play or pause music">
+
+                ▶️
+
+            </button>
+
+            <input
+                id="volume-slider"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.45"
+                aria-label="Music volume">
+
+        </div>
+
+
+        <!-- ===============================================
+             AUDIO ELEMENTS
+        ================================================ -->
+
+        <audio
+            id="bg-music"
+            loop
+            preload="auto">
+        </audio>
+
+        <audio
+            id="pop-sound"
+            preload="auto">
+        </audio>
+
+        <audio
+            id="click-sound"
+            preload="auto">
+        </audio>
+
+        <audio
+            id="success-sound"
+            preload="auto">
+        </audio>
+
+
+        <!-- ===============================================
+             EFFECT LAYERS
+             (Dynamic elements are inserted here by JS)
+        ================================================ -->
+
+        <div id="floating-love-container"></div>
+
+        <div id="confetti-container"></div>
+
+        <div id="cursor-trail-container"></div>
+
+        <div id="overlay-root"></div>
+<!-- ===============================================
+             BALLOON GAME SCREEN
+        ================================================ -->
+
+        <section
+            id="balloon-screen"
+            class="screen">
+
+            <div class="glass-card">
+
+                <h1 id="birthday-heading">
+
+                    Let's unlock your birthday surprise 🎈
+
+                </h1>
+
+                <p>
+
+                    Pop every balloon to reveal the hidden birthday.
+
+                </p>
+
+                <div
+                    id="balloon-progress"
+                    class="mt-2">
+
+                    0 / 0 Revealed
+
+                </div>
+
+                <div
+                    id="balloon-container">
+
+                    <!-- Balloons are created dynamically -->
+
+                </div>
+
+                <button
+                    id="open-letter-btn"
+                    class="primary-btn hidden glow-pulse mt-3">
+
+                    Open Your Birthday Letter ❤️
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================================
+             SUCCESS MODAL (OPTIONAL)
+        ================================================ -->
+
+        <div
+            id="balloon-success-overlay"
+            class="overlay hidden">
+
+            <div class="glass-card text-center success-pop">
+
+                <h2>
+
+                    🎉 Congratulations!
+
+                </h2>
+
+                <p>
+
+                    You've unlocked every digit!
+
+                </p>
+
+                <button
+                    id="continue-letter-btn"
+                    class="primary-btn mt-3">
+
+                    Continue ❤️
+
+                </button>
+
+            </div>
+
+        </div>
+<!-- ===============================================
+             LETTER SCREEN
+        ================================================ -->
+
+        <section
+            id="letter-screen"
+            class="screen">
+
+            <div class="glass-card">
+
+                <h1>
+
+                    A Surprise for You... ❤️
+
+                </h1>
+
+                <p>
+
+                    Tap the envelope to reveal your birthday letter.
+
+                </p>
+
+                <!-- Envelope -->
+
+                <div
+                    id="birthday-envelope"
+                    class="envelope">
+
+                    <div class="envelope-body"></div>
+
+                    <div class="envelope-flap"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================================
+             BIRTHDAY LETTER
+        ================================================ -->
+
+        <section
+            id="letter-content-screen"
+            class="screen">
+
+            <article class="letter">
+
+                <h1 id="letter-title">
+
+                    Happy Birthday ❤️
+
+                </h1>
+
+                <div class="divider"></div>
+
+                <p id="typewriter">
+
+                    <!-- Typewriter text appears here -->
+
+                </p>
+
+                <div
+                    id="signature"
+                    class="signature-font">
+
+                    Yours Forever ❤️
+
+                </div>
+
+                <div
+                    class="text-center mt-3">
+
+                    <button
+                        id="gallery-button"
+                        class="primary-btn">
+
+                        Finished? Not yet...  ❤️
+
+                    </button>
+
+                </div>
+
+            </article>
+
+        </section>
+<!-- ===============================================
+             GALLERY SCREEN
+        ================================================ -->
+
+        <section
+            id="gallery-screen"
+            class="screen">
+
+            <div class="glass-card">
+
+                <h1 id="gallery-title">
+
+                    Your Beautiful Memories ❤️
+
+                </h1>
+
+                <p>
+
+                    Every picture tells a story
+                    and every story begins with you.
+
+                </p>
+
+                <div id="gallery-grid">
+
+                    <!-- Photo cards are generated by JavaScript -->
+
+                </div>
+
+                <div class="text-center mt-3">
+
+                    <button
+                        id="final-surprise-btn"
+                        class="primary-btn">
+
+                        Almost There... 🎆
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================================
+             FINAL SCREEN
+        ================================================ -->
+
+        <section
+            id="final-screen"
+            class="screen">
+
+            <div class="glass-card finale-glow">
+
+                <h1 id="ending-title">
+
+                    Happy Birthday! ❤️
+
+                </h1>
+
+                <div class="divider"></div>
+
+                <p id="ending-message">
+
+                    Thank you for becoming the most
+                    beautiful part of my life.
+
+                </p>
+
+                <h2
+                    class="signature-font mt-3">
+
+                    I Love You Forever ❤️
+
+                </h2>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ===============================================
+         LIGHTBOX
+    ================================================ -->
+
+    <div id="lightbox">
+
+        <span id="close-lightbox">
+
+            &times;
+
+        </span>
+
+        <img
+            id="lightbox-image"
+            src=""
+            alt="Memory">
+
+    </div>
+
+
+    <!-- ===============================================
+         FOOTER
+    ================================================ -->
+
+    <footer class="footer">
+
+        Made with ❤️ especially for you.
+
+    </footer>
+
+	<!-- ===============================================
+     	     AUDIO
+	=============================================== -->
+
+	<audio id="bg-music" loop preload="auto"></audio>
+
+	<audio id="pop-sound" preload="auto"></audio>
+
+	<audio id="click-sound" preload="auto"></audio>
+
+	<audio id="success-sound" preload="auto"></audio>
+
+    <!-- ===============================================
+         JAVASCRIPT FILES
+         (Load in this exact order)
+    ================================================ -->
+
+    <script src="js/config.js"></script>
+
+    <script src="js/utils.js"></script>
+
+    <script src="js/app.js"></script>
+
+    <script src="js/password.js"></script>
+
+    <script src="js/proposal.js"></script>
+
+    <script src="js/balloons.js"></script>
+
+    <script src="js/letter.js"></script>
+
+    <script src="js/gallery.js"></script>
+
+    <script src="js/music.js"></script>
+
+    <script src="js/animations.js"></script>
+
+</body>
+
+</html>
